@@ -10,7 +10,7 @@ import time
 import random
 from tkinter import filedialog, Tk
 from colorama import Fore, Style
-from modules.art import bot_logo, colors
+from modules.art import bot_logo
 import platform
 
 # Constantes de configuração

@@ -2,11 +2,11 @@ import os
 import sys
 import time
 from modules.utils import choose_files, distribute_videos, start_streaming, stop_streaming
-from modules.art import bot_logo, colors
+from modules.art import bot_logo
 import questionary
 from colorama import Fore, Style as ColoramaStyle
 from questionary import Style as QuestionaryStyle
-from modules.menu_manager import MenuManager
+from modules.interface_manager import InterfaceManager
 import threading
 import platform
 
@@ -127,12 +127,12 @@ quality = questionary.select(
     style=custom_style
 ).ask()
 
-# Inicializa o MenuManager
-menu = MenuManager()
+# Substitua a criação do MenuManager por:
+interface = InterfaceManager()
 
 # Adiciona os canais ao MenuManager
 for channel_name in ACCOUNTS:
-    menu.initialize_channel(channel_name)  # Usa o nome do canal para exibição
+    interface.initialize_channel(channel_name)  # Usa o nome do canal para exibição
 
 try:
     # Distribui os vídeos entre as contas
@@ -141,7 +141,7 @@ try:
     # Inicia as streams em threads separadas para não bloquear o menu
     processes = []
     for channel_name, video in video_distribution.items():
-        menu.start_channel(channel_name)
+        interface.start_channel(channel_name)
         process = threading.Thread(
             target=start_streaming,
             args=(video, [ACCOUNTS[channel_name]], quality, DEBUG_MODE, gpu)  # Usa a chave correspondente ao canal
@@ -154,7 +154,7 @@ try:
     start_time = time.time()
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
-        menu.draw_menu()
+        interface.draw_menu()
         time.sleep(1)
 
 except KeyboardInterrupt:

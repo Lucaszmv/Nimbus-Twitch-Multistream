@@ -3,33 +3,19 @@ Módulo responsável pela arte ASCII e elementos visuais do console.
 Contém funções para exibição do logo e configurações de cores.
 """
 
-from colorama import Fore, Style
-import os
+from rich.console import Console
+from rich.align import Align
 
-# Adicionando a variável colors que está sendo importada
-# Cor padrão utilizada em todo o aplicativo
-colors = Fore.LIGHTRED_EX
+console = Console()
 
-def bot_logo(logo_color=None):
+def bot_logo():
     """
-    Exibe o logo do bot no console com cores e formatação personalizadas.
-
-    Args:
-        logo_color (colorama.Fore, optional): Cor a ser utilizada no logo. 
-            Se None, utiliza a cor padrão definida em colors.
+    Exibe o logo do bot no console usando Rich para formatação.
     """
-    # Se nenhuma cor for especificada, usa a cor padrão
-    if logo_color is None:
-        logo_color = colors
-        
-    # Exibe o logo do bot no console.
-    largura_console = os.get_terminal_size().columns
-    print(f"{Style.NORMAL}{logo_color}\n\n")
-    print(f"{Style.NORMAL}╦  ╦ ╦╔╦╗╦╔╗╔╔═╗".center(largura_console))
-    print(f"{Style.NORMAL}║  ║ ║║║║║║║║╠═╣".center(largura_console))
-    print(f"{Style.NORMAL}╩═╝╚═╝╩ ╩╩╝╚╝╩ ╩".center(largura_console))
+    logo = """
+[white bold]                       NIMBUS[/white bold]
+[yellow] ────────────────────────────────────────────────[/yellow]
+[white]       Made by: [bold yellow]Velbots[/bold yellow]  │  Version: [bold yellow]1.0.0[/bold yellow][/white]
+[yellow] ────────────────────────────────────────────────[/yellow]"""
 
-    print(f"{Style.NORMAL}{Fore.LIGHTWHITE_EX}            TWITCH MULTI STREAM{Fore.RESET}".center(largura_console))
-    print(f"{Style.NORMAL}{Fore.LIGHTWHITE_EX}          ───────────────────────────────────────{Fore.RESET}".center(largura_console))
-    print(f"{Style.NORMAL}{Fore.LIGHTWHITE_EX}                                 Made by: {logo_color}Velbots{Fore.RESET}{Fore.LIGHTWHITE_EX}  |  Version: {logo_color}1.0.0{Fore.RESET}".center(largura_console))
-    print(f"{Style.NORMAL}{Fore.LIGHTWHITE_EX}          ───────────────────────────────────────{Fore.RESET}".center(largura_console))
+    console.print(Align.center(logo))
