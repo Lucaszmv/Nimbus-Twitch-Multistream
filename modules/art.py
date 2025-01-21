@@ -15,7 +15,7 @@ def bot_logo():
     logo = """
 [white bold]                       NIMBUS[/white bold]
 [yellow] ────────────────────────────────────────────────[/yellow]
-[white]       Made by: [bold yellow]Velbots[/bold yellow]  │  Version: [bold yellow]1.0.0[/bold yellow][/white]
+[default]       Made by: Velbots  │  Version: [not bold]1.0.0[/not bold][/default]
 [yellow] ────────────────────────────────────────────────[/yellow]"""
 
     console.print(Align.center(logo))

@@ -26,7 +26,7 @@ bot_logo()
 # Atualiza o estilo do questionary para usar cores personalizadas
 custom_style = QuestionaryStyle([
     ('qmark', 'fg:#ffff00'),  # Amarelo para o [BOT]
-    ('question', 'fg:#ffffff nobold'),  # Branco sem negrito
+    ('question', 'fg:#ffffff nobold'),  # Branco para o texto da pergunta
     ('answer', 'fg:#ffffff nobold'),  # Branco sem negrito
     ('pointer', 'fg:#ffff00 nobold'),  # Amarelo sem negrito
     ('highlighted', 'fg:#ffff00 nobold'),  # Amarelo sem negrito
@@ -49,16 +49,16 @@ if os.path.exists(ACCOUNTS_PATH) and os.path.getsize(ACCOUNTS_PATH) > 0:
                 ACCOUNTS[channel_name.strip()] = stream_key.strip()
     
     if ACCOUNTS:
-        print(f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Canais disponíveis:")
+        print(f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Canais disponíveis:\n")
         channel_names = list(ACCOUNTS.keys())
         for idx, channel in enumerate(channel_names, 1):
             print(f"{Fore.YELLOW}[{idx}]{Fore.WHITE} {channel}")
         
         while True:
-            print(f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Digite os números dos canais que deseja usar (ex: 1,3,5) ou 'all' para usar todos:{Fore.RESET}")
             selection = questionary.text(
-                "",
-                style=custom_style
+                "\n[BOT] Digite os números dos canais que deseja usar (ex: 1,3,5) ou 'all' para usar todos: ",
+                style=custom_style,
+                qmark=""  # Remove o "?" padrão
             ).ask()
             
             if selection.lower() == 'all':
@@ -81,7 +81,9 @@ if os.path.exists(ACCOUNTS_PATH) and os.path.getsize(ACCOUNTS_PATH) > 0:
         
         selected_accounts = {channel: ACCOUNTS[channel] for channel in selected_channels}
         ACCOUNTS = selected_accounts
-                
+        
+        clear_screen()
+        bot_logo()
         print(f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Canais selecionados:")
         for idx, channel in enumerate(ACCOUNTS.keys(), 1):
             print(f"{Fore.YELLOW}[{idx}]{Fore.WHITE} {channel}")
@@ -102,20 +104,30 @@ if not videos_to_stream:
     time.sleep(5)
     sys.exit(-1)
 
+clear_screen()
+bot_logo()
+print(f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Vídeos selecionados:")
+for idx, file in enumerate(videos_to_stream, 1):
+    print(f"{Fore.YELLOW}[{idx}]{Fore.WHITE} {os.path.basename(file)}{Fore.RESET}")
+
+clear_screen()
+bot_logo()
 # Mensagens do seletor de GPU e qualidade
 gpu = questionary.select(
-    message="Select your GPU",
+    message=f"Select your GPU",
     choices=[
         "None",
         "NVIDIA", 
         "AMD"
     ],
-    qmark="[BOT]",  # Usa apenas [BOT] sem códigos de cor
+    qmark="\n[BOT]",  # Adiciona quebra de linha e [BOT]
     style=custom_style
 ).ask()
 
+clear_screen()
+bot_logo()
 quality = questionary.select(
-    message="Choose video quality",
+    message=f"Choose video quality",
     choices=[
         "160",
         "360", 
@@ -123,9 +135,14 @@ quality = questionary.select(
         "720",
         "1080"
     ],
-    qmark="[BOT]",  # Usa apenas [BOT] sem códigos de cor
+    qmark="\n[BOT]",  # Adiciona quebra de linha e [BOT]
     style=custom_style
 ).ask()
+
+clear_screen()
+bot_logo()
+print(f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Qualidade selecionada: {quality}")
+time.sleep(1)
 
 # Substitua a criação do MenuManager por:
 interface = InterfaceManager()
