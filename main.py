@@ -23,17 +23,17 @@ def clear_screen():
 clear_screen()
 bot_logo()
 
-# Definindo um estilo customizado (movido para cá)
+# Atualiza o estilo do questionary para usar cores personalizadas
 custom_style = QuestionaryStyle([
-    ('qmark', 'fg:#000000'),  # Esconde o símbolo "?"
-    ('question', 'fg:#ff0000 nobold noitalic'),  # Vermelho sem negrito
-    ('answer', 'fg:#ff5733 nobold noitalic'),  # Laranja sem negrito
-    ('pointer', 'fg:#ff0000 nobold noitalic'),  # Vermelho sem negrito
-    ('highlighted', 'fg:#ff0000 nobold noitalic'),  # Vermelho sem negrito
-    ('selected', 'fg:#ff0000 nobold noitalic'),  # Vermelho sem negrito
-    ('text', 'fg:#ffffff nobold noitalic'),  # Branco sem negrito
-    ('instruction', 'fg:#ffffff nobold noitalic'),  # Branco sem negrito
-    ('disabled', 'fg:#858585 nobold noitalic')  # Cinza sem negrito
+    ('qmark', 'fg:#ffff00'),  # Amarelo para o [BOT]
+    ('question', 'fg:#ffffff nobold'),  # Branco sem negrito
+    ('answer', 'fg:#ffffff nobold'),  # Branco sem negrito
+    ('pointer', 'fg:#ffff00 nobold'),  # Amarelo sem negrito
+    ('highlighted', 'fg:#ffff00 nobold'),  # Amarelo sem negrito
+    ('selected', 'fg:#ffff00 nobold'),  # Amarelo sem negrito
+    ('text', 'fg:#ffffff nobold'),  # Branco sem negrito
+    ('instruction', 'fg:#ffffff nobold'),  # Branco sem negrito
+    ('disabled', 'fg:#858585 nobold')  # Cinza sem negrito
 ])
 
 ACCOUNTS_PATH = os.path.join(os.getcwd(), "channels_keys.txt")
@@ -104,14 +104,26 @@ if not videos_to_stream:
 
 # Mensagens do seletor de GPU e qualidade
 gpu = questionary.select(
-    message=f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Select your GPU{Fore.RESET}",
-    choices=["None", "NVIDIA", "AMD"],
+    message="Select your GPU",
+    choices=[
+        "None",
+        "NVIDIA", 
+        "AMD"
+    ],
+    qmark="[BOT]",  # Usa apenas [BOT] sem códigos de cor
     style=custom_style
 ).ask()
 
 quality = questionary.select(
-    message=f"\n{Fore.YELLOW}[BOT]{Fore.WHITE} Choose video quality{Fore.RESET}",
-    choices=["160", "360", "480", "720", "1080"],
+    message="Choose video quality",
+    choices=[
+        "160",
+        "360", 
+        "480",
+        "720",
+        "1080"
+    ],
+    qmark="[BOT]",  # Usa apenas [BOT] sem códigos de cor
     style=custom_style
 ).ask()
 
