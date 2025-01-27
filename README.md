@@ -1,4 +1,4 @@
-# 🌩️ Nimbus Multistream
+# 🌩️ Nimbus Twitch Multistream
 
 Ferramenta para transmitir múltiplos streams para Twitch simultaneamente.
 
@@ -22,8 +22,8 @@ Ferramenta para transmitir múltiplos streams para Twitch simultaneamente.
 ### 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/Lucaszmv/Nimbus-Multistream.git
-cd Nimbus-Multistream
+git clone https://github.com/Lucaszmv/Nimbus-Twitch-Multistream.git
+cd Nimbus-Twitch-Multistream
 ```
 
 ### 2. Instale o FFmpeg:
